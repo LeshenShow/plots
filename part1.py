@@ -8,18 +8,11 @@ for y, x in enumerate(df['Major_category']):
     df.loc[y, 'Major_category'] = x.replace(' & ', ' &\n')
 
 color = ('#bc5477', '#90bdc0', '#dc9bb3', '#92c1df', '#ca9eca', '#8ecb73')
-# text_color = '#a8bed6'
-# bg_color = '#182633'
 text_color = '#c7cfda'
 bg_color = '#506f84'
 
 fig = plt.figure(figsize=(16, 8))
 plt.suptitle("Студенты", color=text_color, fontsize=15)
-# fig.add_subplot(ROW,COLUMN,POSITION)
-#
-# ROW=number of rows
-# COLUMN=number of columns
-# POSITION= position of the graph you are plotting
 ax1 = fig.add_subplot(221)  # OR plt.subplot(2,2,1)
 df_sex = df.loc[df['Rank'] < 180, ['Major_category', 'Men', 'Women', 'Total']]
 df_sex = df_sex.groupby(['Major_category']).sum().reset_index().sort_values(by=['Total'], ascending=False)
@@ -104,30 +97,5 @@ ax4.set_title("Доля частичной и полной занятости", 
 
 fig.set_facecolor(bg_color)
 plt.tight_layout()
+plt.savefig("part1.png", bbox_inches='tight', dpi=200)
 plt.show()
-
-# fig, axes = plt.subplots(nrows=2, ncols=2, figsize=(10, 5))
-# file = "https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/recent-grads.csv"
-# # file_categ = 'https://raw.githubusercontent.com/fivethirtyeight/data/master/college-majors/recent-grads.csv'
-# df = pd.read_csv(file)
-# # df_categ = pd.read_csv(file_categ)
-# # df = df.merge(df_categ[['Major_code', 'Major_category']], on='Major_code')
-# pd.set_option("display.max.columns", None)
-# df_sex = df.loc[df['Rank'] < 180, ['Major_category', 'Men', 'Women', 'Total']]
-# df_sex = df_sex.groupby(['Major_category']).sum().reset_index().sort_values(by=['Total'], ascending=False)
-# for y, x in enumerate(df_sex['Major_category']):
-#     df_sex.loc[y, 'Major_category'] = x.replace(' & ', ' &\n')
-# # print(df_sex.loc[2, 'Men'])
-# df_sex.plot(ax=axes[0,0], x='Major_category', y=['Men', 'Women'], figsize=(10, 5), kind='bar')
-# # plot_plot = df_short.plot(x='Major', y=['Men', 'Women'], kind='bar', rot=0, figsize=(10, 5))
-# # plt.tick_params(axis='x', rotation=5)
-# df_sex2 = df.loc[df['Rank'] < 180, ['Major_category', 'Men', 'Women', 'Total']]
-# df_sex2 = df_sex2.groupby(['Major_category']).sum().reset_index().sort_values(by=['Total'], ascending=False)
-# for y, x in enumerate(df_sex2['Major_category']):
-#     df_sex2.loc[y, 'Major_category'] = x.replace(' & ', ' &\n')
-# # print(df_sex.loc[2, 'Men'])
-# df_sex2.plot(ax=axes[0,1], x='Major_category', y=['Men', 'Women'], kind='bar')
-# fig.delaxes(axes[1,0])
-# fig.delaxes(axes[1,1])
-# plt.tight_layout()
-# plt.show()
