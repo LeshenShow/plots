@@ -2,11 +2,8 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation, writers
 import pandas as pd
 import numpy as np
-# import pylab
-# import random
 from matplotlib import animation
 
-# import seaborn as sns
 df = pd.read_csv("data/daily_temperature_1000_cities_1980_2020.csv", low_memory=False)
 date = np.unique(df['Date'].values)
 
@@ -23,52 +20,11 @@ Kyiv = df['Kyiv'].values
 Lisbon = df['Lisbon'].values
 London = df['London'].values
 Rome = df['Rome'].values
-# print(max(Moscow))
-# print(max(Prague))
-# print(max(Amsterdam))
-# print(max(Helsinki))
-# print(max(Tirana))
-# print(max(Athens))
-# print(max(Belgrade))
-# print(max(Berlin))
-# print(max(Paris))
-# print(max(Kyiv))
-# print(max(Lisbon))
-# print(max(London))
-# print(max(Rome))
-#
-# print(min(Moscow))
-# print(min(Prague))
-# print(min(Amsterdam))
-# print(min(Helsinki))
-# print(min(Tirana))
-# print(min(Athens))
-# print(min(Belgrade))
-# print(min(Berlin))
-# print(min(Paris))
-# print(min(Kyiv))
-# print(min(Lisbon))
-# print(min(London))
-# print(min(Rome))
 text_color = '#C8D2D1'
 bg_color = '#145c6d'
-# fig = plt.figure()
-# axes = fig.add_subplot(1, 1, 1)
 fig, ax = plt.subplots(figsize=(16, 8))
 fig.set_facecolor(bg_color)
 
-
-# plt.tight_layout()
-
-
-# palette = list(reversed(sns.color_palette("Spectral", 9).as_hex()))
-# labels = ('Tokyo', 'Moscow','Prague' )
-
-# axes.set_ylim(1,2)
-# axes.set_xlabel('Celc')
-# plt.style.use("seaborn")
-# fig = plt.figure()
-# axes = fig.add_subplot(1, 1, 1)
 def bar_race(i):
     ax.clear()
 
@@ -112,20 +68,6 @@ def bar_race(i):
 
     ax.bar_label(bar_h, labels=list_y_ticks, padding=5, color=text_color, fontsize=20,
                  label_type='edge')  # label_type='center' 'edge'
-    # https: // questu.ru / questions / 28931224 /
-    # label = "{:.1f}".format(x_value)
-    #
-    # # Create annotation
-    # plt.annotate(
-    #     label,  # Use `label` as label
-    #     (x_value, y_value),  # Place label at end of the bar
-    #     xytext=(space, 0),  # Horizontally shift label by `space`
-    #     textcoords="offset points",  # Interpret `xytext` as offset in points
-    #     va='center',  # Vertically center label
-    #     ha=ha)  # Horizontally align label differently for
-    # # positive and negative values.
-
-    # plt.text(x, y, s, ha, Bbox)
 
     ax.set_xlim(left=min(min(list_y_ticks) - 2.5, 0))  # , right=30
     ax.patch.set_facecolor(bg_color)
@@ -140,8 +82,4 @@ def bar_race(i):
     ax.grid(axis='x', color=text_color, linewidth=0.5, linestyle='-')
 
 ani = FuncAnimation(fig, bar_race, interval=50, blit=False) #, blit=True) frames=100000,
-# df.plot(x='Date', y=['Tokyo', 'Moscow', 'Prague'])
-# f = "C:\\My projects\\plots\\animation\\weather.mp4"
-# writervideo = animation.FFMpegWriter(fps=59)
-# ani.save(f, writer='ffmpeg')
 plt.show()
