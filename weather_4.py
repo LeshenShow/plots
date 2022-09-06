@@ -1,10 +1,11 @@
 import matplotlib.pyplot as plt
-from matplotlib.animation import FuncAnimation
+from matplotlib.animation import FuncAnimation, writers
 import pandas as pd
 import numpy as np
 # import pylab
 # import random
-# from matplotlib import animation
+from matplotlib import animation
+
 # import seaborn as sns
 df = pd.read_csv("data/daily_temperature_1000_cities_1980_2020.csv", low_memory=False)
 date = np.unique(df['Date'].values)
@@ -55,6 +56,8 @@ bg_color = '#145c6d'
 # axes = fig.add_subplot(1, 1, 1)
 fig, ax = plt.subplots(figsize=(16, 8))
 fig.set_facecolor(bg_color)
+
+
 # plt.tight_layout()
 
 
@@ -107,8 +110,8 @@ def bar_race(i):
     for tl, tc in zip(plt.gca().get_yticklabels(), color):
         tl.set_color(tc)
 
-
-    ax.bar_label(bar_h, labels=list_y_ticks, padding=0, color=text_color, fontsize=20, label_type='center') #label_type='edge'
+    ax.bar_label(bar_h, labels=list_y_ticks, padding=5, color=text_color, fontsize=20,
+                 label_type='edge')  # label_type='center' 'edge'
     # https: // questu.ru / questions / 28931224 /
     # label = "{:.1f}".format(x_value)
     #
@@ -123,18 +126,22 @@ def bar_race(i):
     # # positive and negative values.
 
     # plt.text(x, y, s, ha, Bbox)
-    # ax.set_xlim(left=-30, right=30)
+
+    ax.set_xlim(left=min(min(list_y_ticks) - 2.5, 0))  # , right=30
     ax.patch.set_facecolor(bg_color)
     ax.spines['left'].set_color(text_color)
     ax.spines['right'].set_color(bg_color)
     ax.spines['bottom'].set_color(text_color)
     ax.spines['top'].set_color(bg_color)
     ax.tick_params(axis='x', colors=text_color, labelsize=20)
-    ax.tick_params(axis='y', color=text_color,  labelsize=20) # labelcolor=text_color,
+    ax.tick_params(axis='y', color=text_color, labelsize=20)  # labelcolor=text_color,
     ax.set_xlabel("Температура", color=text_color)  # plt.xlabel
     ax.set_ylabel("Город", color=text_color)  # plt.ylabel
     ax.grid(axis='x', color=text_color, linewidth=0.5, linestyle='-')
 
-ani = FuncAnimation(fig, bar_race, interval=50, blit=False)  # blit=True)
+ani = FuncAnimation(fig, bar_race, interval=50, blit=False) #, blit=True) frames=100000,
 # df.plot(x='Date', y=['Tokyo', 'Moscow', 'Prague'])
+# f = "C:\\My projects\\plots\\animation\\weather.mp4"
+# writervideo = animation.FFMpegWriter(fps=59)
+# ani.save(f, writer='ffmpeg')
 plt.show()
